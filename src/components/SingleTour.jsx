@@ -17,7 +17,7 @@ const SingleTour = () => {
     async function fetchData() {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/products/find/${id}`
+          `https://ecommerce-lxo3.onrender.com/api/products/find/${id}`
         );
 
         // res.data.sort(compare)
