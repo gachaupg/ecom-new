@@ -306,7 +306,7 @@ console.log('search',searchTerm);
             sx={{ flexGrow: 1, ml: 20, display: { xs: "none", md: "flex" } }}
           >
            
-           
+          
             
           <Link style={{marginLeft:'1rem',textDecoration:'none'}} to='/products'>
               All Products

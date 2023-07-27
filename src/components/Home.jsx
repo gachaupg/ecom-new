@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { FaWhatsapp, FaMoneyCheckAlt } from "react-icons/fa";
 import { TiFlag } from "react-icons/ti"; // TiFlag represents the flag icon from the "react-icons" package
+import Dropdown from 'react-bootstrap/Dropdown';
 
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -68,7 +69,16 @@ const Home = () => {
           <>
             <h2>Welcome to Choose Shopsmart</h2>
           </>
-
+          <div style={{marginLeft:'2rem'}}>
+          <MDBDropdown>
+      <MDBDropdownToggle>Dropdown button</MDBDropdownToggle>
+      <MDBDropdownMenu>
+        <MDBDropdownItem link>Action</MDBDropdownItem>
+        <MDBDropdownItem link>Another action</MDBDropdownItem>
+        <MDBDropdownItem link>Something else here</MDBDropdownItem>
+      </MDBDropdownMenu>
+    </MDBDropdown>
+          </div>
           <h3
             style={{ color: "blue ", textAlign: "center", marginTop: "1rem" }}
           >
