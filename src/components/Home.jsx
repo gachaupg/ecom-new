@@ -70,14 +70,7 @@ const Home = () => {
             <h2>Welcome to Choose Shopsmart</h2>
           </>
           <div style={{marginLeft:'2rem'}}>
-          <MDBDropdown>
-      <MDBDropdownToggle>Dropdown button</MDBDropdownToggle>
-      <MDBDropdownMenu>
-        <MDBDropdownItem link>Action</MDBDropdownItem>
-        <MDBDropdownItem link>Another action</MDBDropdownItem>
-        <MDBDropdownItem link>Something else here</MDBDropdownItem>
-      </MDBDropdownMenu>
-    </MDBDropdown>
+        
           </div>
           <h3
             style={{ color: "blue ", textAlign: "center", marginTop: "1rem" }}
