@@ -27,6 +27,12 @@ import Post from "./components/Post";
 import Otp from "./components/auth/Otp";
 import AllProducts from "./components/AllProducts";
 import ProfilePage from "./components/auth/Profile";
+import Phones from "./components/categories/Phones";
+import Laptops from "./components/categories/Laptops";
+import Electronics from "./components/categories/Electronics";
+import Clothing from "./components/categories/Clothing";
+import Furnatures from "./components/categories/Furnatures";
+import Others from "./components/categories/Others";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +49,7 @@ function App() {
         <ToastContainer />
         {/* <Header/> */}
         <NavBar />
+        
         <div className="content-container">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -54,6 +61,12 @@ function App() {
             <Route path="/otp" element={<Otp />} />
             <Route path="/post" element={<Post/>} />
             <Route path="/products" element={<AllProducts/>} />
+            <Route path="/phones" element={<Phones/>} />
+            <Route path="/laptops" element={<Laptops/>} />
+            <Route path="/electronics" element={<Electronics/>} />
+            <Route path="/clothing" element={<Clothing/>} />
+            <Route path="/furnatures" element={<Furnatures/>} />
+            <Route path="/others" element={<Others/>} />
             <Route path="/admin" element={<Dashboard />}>
               <Route path="summary" element={<Summary />} />
               <Route path="products" element={<Products />}>
@@ -67,9 +80,7 @@ function App() {
                 <Route path="/tour/:id" element={<SingleTour />} />
           </Routes>
         </div>
-        <div style={{marginTop:'50rem'}}>
-
-        </div>
+       
         <Footer/>
 
        

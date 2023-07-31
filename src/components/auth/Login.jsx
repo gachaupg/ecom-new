@@ -22,16 +22,16 @@ const Login = () => {
 
     console.log(user);
     dispatch(loginUser(user));
-    if(auth.loginStatus ==="success"){
+ 
       navigate("/");
       toast.success('login  sucess')
-    }
+    
 
   };
 console.log(auth.loginStatus);
   return (
     <>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledForm style={{marginTop:"10rem"}} onSubmit={handleSubmit}>
         <h2>Login</h2>
         <input
           type="email"
@@ -51,6 +51,7 @@ console.log(auth.loginStatus);
         Register here
         </Link></p>
       </StyledForm>
+      <div style={{marginBottom:"9rem"}}></div>
     </>
   );
 };

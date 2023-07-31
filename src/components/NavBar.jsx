@@ -22,6 +22,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = [
@@ -37,7 +38,7 @@ const settings = [
 
 function ResponsiveAppBar() {
 const user = useSelector((state) => state.auth);
-console.log('user',user.name);
+console.log('userggg',user);
 const { cartTotalQuantity } = useSelector((state) => state.cart);
 
 const [query, setQuery] = useState("");
@@ -156,6 +157,7 @@ console.log('search',searchTerm);
   const navigate = useNavigate();
   const handleLogout = () => {
     dispatch(logoutUser());
+    toast.error('logout success')
     navigate("/");
   };
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -281,11 +283,11 @@ console.log('search',searchTerm);
             
           </Box>
           <Link style={{textDecoration:'none',listStyle:'none',color:'white'}} to='/'>
-          <h5>Choose ShopSmart</h5>
+          <h5>ShopSmart</h5>
 
           </Link>
           <Link to="/cart">
-       <div className="nav-bag">
+       <div style={{marginLeft:'2rem',textDecoration:'none'}} className="nav-bag">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="35"
@@ -325,7 +327,7 @@ console.log('search',searchTerm);
                 sx={{ p: 0 }}
               >
                 {/* {user?.result?.name} */}
-                <Avatar alt="" src={user?.result?.img} />
+                <Avatar alt="" src={user?.img} />
               </IconButton>
             </Tooltip>
 

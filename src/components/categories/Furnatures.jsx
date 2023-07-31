@@ -5,10 +5,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { addToCart } from "../slices/cartSlice";
+import { addToCart } from "../../slices/cartSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Flags from "./Flags";
+import Flags from "../Flags";
 import { MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle } from "mdb-react-ui-kit";
 // import { useGetAllProductsQuery } from "../slices/productsApi";
 
@@ -47,7 +47,7 @@ const Home = () => {
 
         res.data.sort(compare);
         const result = res.data.filter((_, index) => index < 30);
-        setUsers(result);
+        setUsers(res.data);
         console.log(users);
       } catch (error) {
         console.log(error);
@@ -58,48 +58,26 @@ const Home = () => {
 
   return (
     <>
-     <MDBDropdown >
-      <MDBDropdownToggle style={{height:'2rem',width:"10rem",marginTop:"3rem",marginLeft:'3rem'}}>Categories</MDBDropdownToggle>
-      <MDBDropdownMenu style={{width:"2rem"}}>
-        <Link to='/phones'>
-        <MDBDropdownItem >Phones</MDBDropdownItem></Link>
-        <Link to='/electronics'><MDBDropdownItem >Electronices</MDBDropdownItem></Link>
-        <Link to='/laptops'><MDBDropdownItem >Laptops</MDBDropdownItem></Link>
-        <Link to='/clothing'><MDBDropdownItem >Clothing</MDBDropdownItem></Link>
-        <Link to='/furnatures'><MDBDropdownItem >Furnatures</MDBDropdownItem></Link>
-        <Link to='/others'><MDBDropdownItem >Others</MDBDropdownItem></Link>
-      </MDBDropdownMenu>
-    </MDBDropdown>
+     
     
-
     <div className="home-container">
        
       {status === "success" ? (
         <>
-          <div className="search">
-            <input
-              type="text"
-              placeholder="Search by title..."
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
-          <>
-            <h2>Welcome to Shopsmart</h2>
-          </>
-          <div style={{marginLeft:'2rem'}}>
-        
-          </div>
-          <h3
-            style={{ color: "blue ", textAlign: "center", marginTop: "1rem" }}
-          >
-            New Arrivals
+          <h3 style={{textAlign:'center'}}>
+          All  Furnatures
           </h3>
           <div className="products">
             {users &&
               users
                 .filter((user) => user.brand.toLowerCase().includes(query))
                 .map((product) => (
-                  <div key={product._id} className="product">
+                  <>
+                  {product.brand==='furnatures' ?(
+                    <>
+                     <div key={product._id} className="product">
+                    
+                
                     <h3>{product.name}</h3>
                     <img src={product.image?.url} alt={product.name} />
                     {/* <div className="details">
@@ -134,6 +112,10 @@ const Home = () => {
                     <button style={{backgroundColor:'red'}}>get in touch <FaWhatsapp/>Whatsapp</button>
                     </a> */}
                   </div>
+                    </>
+                  ):""}
+                 
+                  </>
                 ))}
           </div>
         </>
@@ -143,20 +125,7 @@ const Home = () => {
         <p>Unexpected error occured...</p>
       )}
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "1rem",
-        }}
-        className="main-bottom"
-      >
-        <Link to='/products'>
-        <button style={{paddingLeft:'4px',paddingRight:'4px'}}>More products</button>
-
-        </Link>
-      </div>
+      
       <>
         <Flags />
       </>

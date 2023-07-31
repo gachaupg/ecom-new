@@ -41,7 +41,8 @@ const SingleTour = () => {
         display: "flex",
         alinItems: "center",
         justifyContent: "center",
-        width:'100%'
+        width:'100%',
+        marginTop:"3rem"
       }}
     >
       <Card border="orange" style={{ width: "18rem" }}>
@@ -63,10 +64,11 @@ const SingleTour = () => {
         </Card.Body>
         <button
           style={{
-            background: "blue",
+            background: "orange",
             borderRadius: "2px",
             border: "none",
             color: "white",
+            height:"3rem"
           }}
           onClick={() => handleAddToCart(users)}
         >
