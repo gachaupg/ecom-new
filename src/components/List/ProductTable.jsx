@@ -124,6 +124,7 @@ import { Link } from "react-router-dom";
 import {toast} from 'react-toastify'
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { productsDelete } from "../../slices/productsSlice";
 function ResponsiveExample() {
   const [users, setUsers] = useState([]);
   function compare(a, b) {
@@ -139,8 +140,9 @@ function ResponsiveExample() {
   const { user } = useSelector((state) => ({ ...state.auth }));
 const[loading, setLoading]=useState(true)
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this tour ?")) {
-    }
+
+      dispatch(productsDelete(id))
+   
   };
 
   const id = user?.result?._id;
@@ -190,7 +192,7 @@ const[loading, setLoading]=useState(true)
             <th>Category</th>
             
             <th>Image</th>
-            <th>Update</th>
+            <th>Delete</th>
           </>
 
           {/* ))} */}
@@ -208,10 +210,10 @@ const[loading, setLoading]=useState(true)
               <td key={index}>
                 <img style={{width:'2rem'}} src={item.image?.url} alt="" />
               </td>
-              <Link to='/new-product'>
-              <td key={index} style={{color:'blue'}}>Update</td>
+             
+              <td onClick={handleDelete(item._id)} key={index} style={{color:'blue',cursor:"pointer"}}>Delete</td>
 
-              </Link>
+             
             </>
           </tr>
         ))}

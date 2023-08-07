@@ -143,13 +143,13 @@ const[loading, setLoading]=useState(true)
     async function fetchData() {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/users/stats/all`
+          `https://ecommerce-lxo3.onrender.com/api/users/stats/all`
         );
         res.data.sort(compare);
         // const result = res.data.filter((_, index) => index < 30);
         setUsers(res.data);
         setLoading(false)
-        console.log("user", users);
+        console.log("usergtttt", users);
       } catch (error) {
         console.log(error);
         setLoading(false)

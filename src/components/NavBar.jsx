@@ -197,6 +197,7 @@ console.log('search',searchTerm);
 
   return (
     <><h4 style={{color:'red'}}>Choose</h4>
+    
     <AppBar style={{ color: "white ", background: "black" }} position="fixed">
       
       <Container maxWidth="xl df">
@@ -245,7 +246,7 @@ console.log('search',searchTerm);
               {/* ))} */}
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  {user._id && (
+                  {user._id &&  user.verified===true && (
                     <Link to="/profile">
                       <Typography textAlign="center">{setting.one}</Typography>
                     </Link>
@@ -283,7 +284,7 @@ console.log('search',searchTerm);
             
           </Box>
           <Link style={{textDecoration:'none',listStyle:'none',color:'white'}} to='/'>
-          <h5>ShopSmart</h5>
+          <h5>EASYBUYENTERPRISES</h5>
 
           </Link>
           <Link to="/cart">

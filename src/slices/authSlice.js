@@ -15,6 +15,7 @@ const initialState = {
   city:"",
   phone:"",
   isAdmin: false,
+  varified:false,
   registerStatus: "",
   registerError: "",
   loginStatus: "",
@@ -35,7 +36,7 @@ export const registerUser = createAsyncThunk(
         img:values.img,
         age:values.age,
         phone: values.phone,
-
+        verified:values.verified,
         password: values.password,
       });
 
@@ -106,6 +107,7 @@ const authSlice = createSlice({
         img:user.img,
         phone: user.phone,
           isAdmin: user.isAdmin,
+          verified:user.verified,
           userLoaded: true,
         };
       } else return { ...state, userLoaded: true };
@@ -121,6 +123,7 @@ const authSlice = createSlice({
         _id: "",
         age:"",
         isAdmin: false,
+        verified:false,
         registerStatus: "",
         registerError: "",
         loginStatus: "",
@@ -142,6 +145,7 @@ const authSlice = createSlice({
           email: user.email,
           country: user.country,
           address: user.address,
+          verified:user.verified,
           city: user.city,
           age: user.age,
           img:user.img,
@@ -172,6 +176,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           isAdmin: user.isAdmin,
+         
           loginStatus: "success",
         };
       } else return state;
@@ -197,6 +202,7 @@ const authSlice = createSlice({
           token: action.payload,
           name: user.name,
           email: user.email,
+      
           _id: user._id,
           isAdmin: user.isAdmin,
           getUserStatus: "success",

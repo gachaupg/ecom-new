@@ -15,7 +15,7 @@ const Register = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    task: "",
+    password: "",
     country:"",
     phone:"",
     address:"",
@@ -38,6 +38,7 @@ const handleSubmit = (e) => {
   if (user.age >= ages) {
     console.log('hello');
     dispatch(registerUser(user));
+    console.log('ggggg',user);
     navigate("/otp");
     toast.success('register user success');
   } else {
@@ -112,7 +113,7 @@ const handleDownload = () => {
           type="password"
           required
           placeholder="password"
-          onChange={(e) => setUser({ ...user, task: e.target.value })}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
          <p>profile Photo</p>
                   <FileBase
@@ -123,12 +124,10 @@ const handleDownload = () => {
                     onDone={({ base64 }) => setUser({ ...user, img: base64 })}
                   />
 
-        <button>
-          {auth.rigisterStatus === "pending" ? "Submitting..." : "Register"}
+<button>
+          {auth.registerStatus === "pending" ? "Submitting..." : "Register"}
         </button>
-        {auth.registerStatus === "rejected" ? (
-          <p>{auth.registerError}</p>
-        ) : null}
+        {auth.registerStatus === "rejected" ? <p>{auth.registerError}</p> : null}
 
 <p>if have account <Link to='/login'>
        Login

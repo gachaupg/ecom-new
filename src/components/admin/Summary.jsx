@@ -5,11 +5,11 @@ import styled from "styled-components";
 import Widget from "../summary/Widget";
 import {url,setHeaders} from '../../slices/api'
 
-const baseUrl='http://localhost:5000/api/users/stats'
+const baseUrl='https://ecommerce-lxo3.onrender.com/api/users/stats'
 const Summary = () => {
   const [users,setUsers]=useState([]);
   const [usersperc,setUsersPerc]=useState([])
-
+console.log(usersperc);
   function compare(a,b){
     if(a._id <b._id){
       return 1
@@ -37,11 +37,12 @@ const Summary = () => {
   fetchData()
     },[])
   
+    const [use,setUse]=useState([])
 
   const data =[
     {
       icons:<FaUsers/>,
-      digits:users[0]?.total,
+      digits:10,
       isMoney:false,
       title:'Users',
       color:"rgb(102,108,255)",
@@ -69,7 +70,35 @@ const Summary = () => {
     
   ]
 
+    
+const[loading, setLoading]=useState(true)
+  console.log(loading);
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this tour ?")) {
+      dispatch(deleteUser({ id, toast }));
+    }
+  };
 
+ 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(
+          `https://ecommerce-lxo3.onrender.com/api/users/stats/all`
+        );
+        res.data.sort(compare);
+        // const result = res.data.filter((_, index) => index < 30);
+        setUse(res.data);
+        setLoading(false)
+        console.log("usergtttt", use.length);
+      } catch (error) {
+        console.log(error);
+        setLoading(false)
+
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <StyledSummury>
       <MainStats>

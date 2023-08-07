@@ -10,6 +10,7 @@ import {
 } from "../slices/cartSlice";
 
 import { Link } from "react-router-dom";
+import Paypa from './Paypa'
 import PayButton from "./PayButton";
 
 const Cart = () => {
@@ -116,12 +117,8 @@ const Cart = () => {
                   Login to Check out
                 </button>
               )}
-              <a href="https://tinypesa.com/petergachau">
-                <button style={{marginTop:'1rem', backgroundColor:'red'}}>
-                Pay Via Mpesa
-  
-              </button>
-              </a>
+             
+             <Paypa/>
                   
 
               <div className="continue-shopping">
