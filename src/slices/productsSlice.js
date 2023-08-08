@@ -7,6 +7,7 @@ const initialState = {
   items: [],
   status: null,
   createStatus: null,
+  deleteStatus: null,
 };
 
 export const productsFetch = createAsyncThunk(
@@ -40,6 +41,26 @@ export const productsCreate = createAsyncThunk(
   }
 );
 
+export const productsDelete = createAsyncThunk(
+  "tour/deleteTour",
+  async ({ id, toast }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(
+        `${url}/products/${id}`,
+       
+        setHeaders()
+      );
+      toast.success("Deleted Successfully");
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
+
+
 
 
 const productsSlice = createSlice({
@@ -67,6 +88,23 @@ const productsSlice = createSlice({
     },
     [productsCreate.rejected]: (state, action) => {
       state.createStatus = "rejected";
+    },
+    [productsDelete.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [productsDelete.fulfilled]: (state, action) => {
+      state.loading = false;
+      const {
+        arg: { id },
+      } = action.meta;
+      if (id) {
+        state.userTours = state.userTours.filter((item) => item._id !== id);
+        state.tours = state.tours.filter((item) => item._id !== id);
+      }
+    },
+    [productsDelete.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
     },
   },
 });

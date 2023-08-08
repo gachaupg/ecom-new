@@ -152,13 +152,9 @@ const Footer = () => {
       >
 
         ©{new Date().getFullYear()} Copyright: 
-       <span> developed by <a href="https://peter-gachau-dev.netlify.app/">
-        <span style={{color:'red'}}>P.G</span></a></span>
-        <p>             <a style={{ color: "black" }} href="https://wa.me/0757198515">
-        if you need similar projectstext  
-        <WhatsApp/>
-        </a>
-</p>
+       <span>Eazybuyenterprises All Rights Reserved </span>
+       
+
       </div>
     </MDBFooter>
   );

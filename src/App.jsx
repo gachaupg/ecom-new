@@ -33,7 +33,8 @@ import Electronics from "./components/categories/Electronics";
 import Clothing from "./components/categories/Clothing";
 import Furnatures from "./components/categories/Furnatures";
 import Others from "./components/categories/Others";
-
+import Paypa from "./components/Paypa";
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 function App() {
   const dispatch = useDispatch();
 
@@ -44,6 +45,9 @@ function App() {
 
   return (
     <>
+     <PayPalScriptProvider
+      options={{"client-id": "AQmidNL7YVkc9HJqP-GHgGIFAjnSOKlLWdMZxX_hQZgJuVew0x6whkRQbHAcZUMR3hM-KubPc1T3uWBG"}}
+    >
         <div className="App">
       <BrowserRouter>
         <ToastContainer />
@@ -68,25 +72,28 @@ function App() {
             <Route path="/furnatures" element={<Furnatures/>} />
             <Route path="/others" element={<Others/>} />
             <Route path="/admin" element={<Dashboard />}>
+            
               <Route path="summary" element={<Summary />} />
+
               <Route path="products" element={<Products />}>
                 <Route path="create-product" element={<CreateProduct />} />
               </Route>
               <Route path="users" element={<Users />} />
               <Route path="orders" element={<Orders />} />
             </Route>
-          
+          <Route path="checkout" element={<Paypa/>}/>
             <Route path="*" element={<NotFound />} />
                 <Route path="/tour/:id" element={<SingleTour />} />
           </Routes>
         </div>
-       
+       <div style={{marginTop:"5rem"}}></div>
         <Footer/>
 
        
       </BrowserRouter>
       
     </div>
+    </PayPalScriptProvider>
     </>
   )
 }

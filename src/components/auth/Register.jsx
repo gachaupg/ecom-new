@@ -15,7 +15,7 @@ const Register = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    task: "",
+    password: "",
     country:"",
     phone:"",
     address:"",
@@ -35,15 +35,12 @@ const handleSubmit = (e) => {
     toast.error('Please accept the terms and conditions.');
     return;
   }
-  if (user.age >= ages) {
-    console.log('hello');
+ 
     dispatch(registerUser(user));
+    console.log('ggggg',user);
     navigate("/otp");
     toast.success('register user success');
-  } else {
-    alert('you must be 18 years and above')
-    toast.error('You must be 18 years or older to register.');
-  }
+ 
 };
     
 const handleDownload1 = () => {
@@ -72,7 +69,7 @@ const handleDownload = () => {
         <h2>Register</h2>
         <input
           type="text"
-          placeholder="name"
+          placeholder="Your Full Name"
           required
           onChange={(e) => setUser({ ...user, name: e.target.value })}
         />
@@ -82,7 +79,7 @@ const handleDownload = () => {
           required
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
-        <input
+        {/* <input
           type="text"
           placeholder="country"
           onChange={(e) => setUser({ ...user, country: e.target.value })}
@@ -96,39 +93,37 @@ const handleDownload = () => {
           type="text"
           placeholder="address"
           onChange={(e) => setUser({ ...user, address: e.target.value })}
-        />
+        /> */}
         <input
           type="number"
           placeholder="phone"
           onChange={(e) => setUser({ ...user, phone: e.target.value })}
         />
-         <input
+         {/* <input
           type="number"
           required
           placeholder="age"
           onChange={(e) => setUser({ ...user, age: e.target.value })}
-        />
+        /> */}
         <input
           type="password"
           required
           placeholder="password"
-          onChange={(e) => setUser({ ...user, task: e.target.value })}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-         <p>profile Photo</p>
+         {/* <p>profile Photo</p>
                   <FileBase
                   required
                     type="file"
                     placeholder="mpesa screenshot"
                     multiple={false}
                     onDone={({ base64 }) => setUser({ ...user, img: base64 })}
-                  />
+                  /> */}
 
-        <button>
-          {auth.rigisterStatus === "pending" ? "Submitting..." : "Register"}
+<button>
+          {auth.registerStatus === "pending" ? "Submitting..." : "Register"}
         </button>
-        {auth.registerStatus === "rejected" ? (
-          <p>{auth.registerError}</p>
-        ) : null}
+        {auth.registerStatus === "rejected" ? <p>{auth.registerError}</p> : null}
 
 <p>if have account <Link to='/login'>
        Login

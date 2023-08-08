@@ -15,16 +15,18 @@ const initialState = {
   city:"",
   phone:"",
   isAdmin: false,
+  varified:false,
   registerStatus: "",
   registerError: "",
   loginStatus: "",
   loginError: "",
   userLoaded: false,
+  deleteStatus:""
 };
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
-  async (values, { rejectWithValue }) => {
+async (values, { rejectWithValue }) => {
     try {
       const token = await axios.post(`${url}/register`, {
         name: values.name,
@@ -35,7 +37,7 @@ export const registerUser = createAsyncThunk(
         img:values.img,
         age:values.age,
         phone: values.phone,
-
+        verified:values.verified,
         password: values.password,
       });
 
@@ -64,6 +66,22 @@ export const loginUser = createAsyncThunk(
     } catch (error) {
       console.log(error.response);
       return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const productsDelete = createAsyncThunk(
+  "tour/deleteTour",
+  async ({ id, toast }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(
+        `${url}/register/${id}`,
+       
+        setHeaders()
+      );
+      toast.success("Deleted Successfully");
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -106,6 +124,7 @@ const authSlice = createSlice({
         img:user.img,
         phone: user.phone,
           isAdmin: user.isAdmin,
+          verified:user.verified,
           userLoaded: true,
         };
       } else return { ...state, userLoaded: true };
@@ -121,6 +140,7 @@ const authSlice = createSlice({
         _id: "",
         age:"",
         isAdmin: false,
+        verified:false,
         registerStatus: "",
         registerError: "",
         loginStatus: "",
@@ -142,6 +162,7 @@ const authSlice = createSlice({
           email: user.email,
           country: user.country,
           address: user.address,
+          verified:user.verified,
           city: user.city,
           age: user.age,
           img:user.img,
@@ -172,6 +193,7 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           isAdmin: user.isAdmin,
+         
           loginStatus: "success",
         };
       } else return state;
@@ -197,6 +219,7 @@ const authSlice = createSlice({
           token: action.payload,
           name: user.name,
           email: user.email,
+      
           _id: user._id,
           isAdmin: user.isAdmin,
           getUserStatus: "success",
@@ -210,6 +233,32 @@ const authSlice = createSlice({
         getUserError: action.payload,
       };
     });
+
+    builder.addCase(productsDelete.pending, (state, action) => {
+      return {
+        ...state,
+        deleteStatus: "pending",
+      };
+    });
+    builder.addCase(productsDelete.fulfilled, (state, action) => {
+      state.loading = false;
+      const {
+        arg: { id },
+      } = action.meta;
+      if (id) {
+        state.userTours = state.userTours.filter((item) => item._id !== id);
+        state.tours = state.tours.filter((item) => item._id !== id);
+      }
+    });
+    builder.addCase(productsDelete.rejected, (state, action) => {
+      return {
+        ...state,
+        deleteStatus: "rejected",
+        getUserError: action.payload,
+      };
+    });
+
+    
   },
 });
 

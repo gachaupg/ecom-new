@@ -11,8 +11,6 @@ import productsReducer, { productsFetch } from "./slices/productsSlice";
 import cartReducer, { getTotals } from "./slices/cartSlice";
 import authReducer from "./slices/authSlice";
 import { productsApi } from "./slices/productsApi";
-
-
 const store = configureStore({
   reducer: {
     products: productsReducer,

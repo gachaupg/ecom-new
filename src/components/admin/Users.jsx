@@ -143,13 +143,13 @@ const[loading, setLoading]=useState(true)
     async function fetchData() {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/users/stats/all`
+          `https://ecommerce-lxo3.onrender.com/api/users/stats/all`
         );
         res.data.sort(compare);
         // const result = res.data.filter((_, index) => index < 30);
         setUsers(res.data);
         setLoading(false)
-        console.log("user", users);
+        console.log("usergtttt", users);
       } catch (error) {
         console.log(error);
         setLoading(false)
@@ -174,7 +174,7 @@ const[loading, setLoading]=useState(true)
      </Stack>
      </>
    ) : (
-    <Table responsive>
+    <Table style={{height:"100rem"}} responsive>
       <thead>
         <tr>
           {/* {Array.from({ length: 5 }).map((_, index) => ( */}
@@ -193,7 +193,7 @@ const[loading, setLoading]=useState(true)
           {/* ))} */}
         </tr>
       </thead>
-      <tbody>
+      <tbody style={{marginBottom:"100rem"}} >
         {users.map((item, index) => (
           <tr>
 

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { StyledForm } from "./StyledForm";
-import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,23 +14,22 @@ const Login = () => {
     password: "",
   });
 
-  
+  useEffect(() => {
+    if (auth._id) {
+      navigate("/");
+    }
+  }, [auth._id, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log(user);
     dispatch(loginUser(user));
- 
-      navigate("/");
-      toast.success('login  sucess')
-    
-
   };
-console.log(auth.loginStatus);
+
   return (
     <>
-      <StyledForm style={{marginTop:"10rem"}} onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <h2>Login</h2>
         <input
           type="email"
@@ -51,7 +49,6 @@ console.log(auth.loginStatus);
         Register here
         </Link></p>
       </StyledForm>
-      <div style={{marginBottom:"9rem"}}></div>
     </>
   );
 };

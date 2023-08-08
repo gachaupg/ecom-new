@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Flags from "./Flags";
 import { MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle } from "mdb-react-ui-kit";
+import Paypa from "./Paypa";
 // import { useGetAllProductsQuery } from "../slices/productsApi";
 
 const excerpt = (str) => {
@@ -73,7 +74,7 @@ const Home = () => {
     
 
     <div className="home-container">
-       
+    
       {status === "success" ? (
         <>
           <div className="search">
@@ -84,7 +85,7 @@ const Home = () => {
             />
           </div>
           <>
-            <h2>Welcome to Shopsmart</h2>
+            <h2>Welcome to Easybuy Enterprises</h2>
           </>
           <div style={{marginLeft:'2rem'}}>
         
