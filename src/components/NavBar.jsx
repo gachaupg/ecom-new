@@ -316,7 +316,9 @@ console.log('search',searchTerm);
             </Link>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
+            
             <Tooltip title="Open settings">
+            
               <IconButton
                 style={{
                   display: "flex",
@@ -329,7 +331,9 @@ console.log('search',searchTerm);
               >
                 {/* {user?.result?.name} */}
                 <Avatar alt="" src={user?.img} />
+                
               </IconButton>
+           
             </Tooltip>
 
             <Menu
@@ -395,6 +399,7 @@ console.log('search',searchTerm);
             </Menu>
             
           </Box>
+          <p style={{color:'black'}}>yryueryueryu</p>
         </Toolbar>
       </Container>
     </AppBar>
