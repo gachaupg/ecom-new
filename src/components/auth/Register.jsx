@@ -37,9 +37,10 @@ const handleSubmit = (e) => {
   }
  
     dispatch(registerUser(user));
-    console.log('ggggg',user);
-    navigate("/otp");
+    // console.log('ggggg',user);
     toast.success('register user success');
+
+    navigate("/login");
  
 };
     

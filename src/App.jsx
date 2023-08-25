@@ -45,9 +45,7 @@ function App() {
 
   return (
     <>
-     <PayPalScriptProvider
-      options={{"client-id": "AQmidNL7YVkc9HJqP-GHgGIFAjnSOKlLWdMZxX_hQZgJuVew0x6whkRQbHAcZUMR3hM-KubPc1T3uWBG"}}
-    >
+    
         <div className="App">
       <BrowserRouter>
         <ToastContainer />
@@ -93,7 +91,6 @@ function App() {
       </BrowserRouter>
       
     </div>
-    </PayPalScriptProvider>
     </>
   )
 }

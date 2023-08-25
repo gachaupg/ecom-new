@@ -42,23 +42,18 @@ export const productsCreate = createAsyncThunk(
 );
 
 export const productsDelete = createAsyncThunk(
-  "tour/deleteTour",
-  async ({ id, toast }, { rejectWithValue }) => {
-    try {
-      const response = await axios.delete(
-        `${url}/products/${id}`,
-       
-        setHeaders()
-      );
-      toast.success("Deleted Successfully");
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data);
+    "tour/deleteTour",
+    async ({ id, toast }, { rejectWithValue }) => {
+      try {
+        const response = await axios.delete(`${url}/products/${id}`);
+        toast.success("Deleted Successfully");
+        return response.data;
+      } catch (err) {
+        return rejectWithValue(err.response.data);
+      }
     }
-  }
+  
 );
-
-
 
 
 
@@ -105,6 +100,17 @@ const productsSlice = createSlice({
     [productsDelete.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
+    },
+    [productsDelete.fulfilled]: (state, action) => {
+      const newList = state.items.filter(
+        (item) => item._id != action.payload._id
+      );
+      state.items = newList;
+      state.deleteStatus = "success";
+      toast.error("Product Deleted!");
+    },
+    [productsDelete.rejected]: (state, action) => {
+      state.deleteStatus = "rejected";
     },
   },
 });

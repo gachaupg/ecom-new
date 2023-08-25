@@ -2,7 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaWhatsapp, FaMoneyCheckAlt } from "react-icons/fa";
 import { TiFlag } from "react-icons/ti"; // TiFlag represents the flag icon from the "react-icons" package
 import Dropdown from 'react-bootstrap/Dropdown';
-
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBIcon,
+} from "mdb-react-ui-kit";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { addToCart } from "../slices/cartSlice";
@@ -47,7 +55,7 @@ const Home = () => {
         const res = await axios.get(`https://ecommerce-lxo3.onrender.com/api/products`);
 
         res.data.sort(compare);
-        const result = res.data.filter((_, index) => index < 30);
+        const result = res.data.filter((_, index) => index < 39);
         setUsers(result);
         console.log(users);
       } catch (error) {
@@ -96,12 +104,16 @@ const Home = () => {
             New Arrivals
           </h3>
           <div className="products">
+
+
+
+
             {users &&
               users
                 .filter((user) => user.brand.toLowerCase().includes(query))
                 .map((product) => (
                   <div key={product._id} className="product">
-                    <h3>{product.name}</h3>
+                    <h6>{product.name}</h6>
                     <img src={product.image?.url} alt={product.name} />
                     {/* <div className="details">
                  
@@ -116,7 +128,7 @@ const Home = () => {
                     <div className="details">
                       <span style={{ display: "flex", gap: "4rem" }}>
                         {" "}
-                        <span>location</span> <span>{product.brand}</span>{" "}
+                        <span>Category</span> <span>{product.brand}</span>{" "}
                       </span>
                     </div>
                     <div className="details">

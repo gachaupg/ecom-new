@@ -96,7 +96,7 @@ const CreateProduct = () => {
           onChange={(e) => setPrice(e.target.value)}
           
         />
-         <input
+         {/* <input
           type="text"
           placeholder="specifications one"
           onChange={(e) => setRam(e.target.value)}
@@ -131,7 +131,7 @@ const CreateProduct = () => {
           placeholder="specifications six"
           onChange={(e) => setSim(e.target.value)}
           
-        />
+        /> */}
         <input
           type="text"
           placeholder="Short Description"

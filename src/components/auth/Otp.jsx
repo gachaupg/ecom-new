@@ -99,7 +99,7 @@ console.log(otp);
     <div style={{display:"flex", alignItems:"center",justifyContent:"center",
     flexDirection:"column",
     marginTop:"6rem",gap:"2rem"}}>
-      <h2> Check your phone for OTP Verification</h2>
+      <h2> Check your email for OTP Verification</h2>
       <form onSubmit={handleSubmit}>
         
         <div style={{display:"flex", alignItems:"center",justifyContent:"center",

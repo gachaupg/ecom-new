@@ -23,11 +23,13 @@ function ResponsiveExample() {
   const dispatch=useDispatch()
   const { user } = useSelector((state) => ({ ...state.auth }));
 const[loading, setLoading]=useState(true)
+
 const handleDelete = (id) => {
   if (window.confirm("Are you sure you want to delete this tour ?")) {
     dispatch(productsDelete({ id, toast }));
   }
 };
+
 
   const id = user?.result?._id;
   useEffect(() => {
@@ -95,6 +97,7 @@ const handleDelete = (id) => {
                 <img style={{width:'2rem'}} src={item.image?.url} alt="" />
               </td>
              
+
               <td key={index} style={{color:'red',cursor:'pointer'}} onClick={() => handleDelete(item._id)} >Delete</td>
 
              
