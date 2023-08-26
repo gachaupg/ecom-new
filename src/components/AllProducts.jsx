@@ -77,7 +77,7 @@ const AllProducts = () => {
                 .filter((user) => user.brand.toLowerCase().includes(query))
                 .map((product) => (
                   <div key={product._id} className="product">
-                    <h3>{product.name}</h3>
+                    <h5>{product.name}</h5>
                     <img src={product.image?.url} alt={product.name} />
                     {/* <div className="details">
                  

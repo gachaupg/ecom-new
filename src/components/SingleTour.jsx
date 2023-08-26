@@ -75,7 +75,7 @@ const SingleTour = () => {
           Buy the Item
         </button>
       </Card>
-      <Card border="orange" style={{ width: "70%" }}>
+      <Card border="orange" className="orangecard" >
         <Card.Header>Features</Card.Header>
         <Card.Body>
           <Card.Text style={{ display: "flex", gap: "5.5rem" }}>

@@ -57,100 +57,94 @@ const Footer = () => {
         </div>
       </section>
 
-      <section className="">
-        <MDBContainer className="text-center text-md-start mt-5">
-          <MDBRow className="mt-3">
-            <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
-              <h6 className=" text-primary text-uppercase fw-bold mb-4 ">
-                <MDBIcon
-                  style={{ color: "blue" }}
-                  icon="gem"
-                  className="me-3"
-                />
-                EASYBUY
-                <span style={{ color: "red" }}>ENTERPRISES</span>
-              </h6>
-              <p> Buy products online at cheap prices.</p>
+      <section className="footer-section">
+  <MDBContainer className="text-center text-md-start mt-5" id="footercontainer">
+    <MDBRow className="mt-3">
+      <MDBCol md="3" lg="3" xl="3" className="mx-auto mb-4 equal-column2">
+        <h6 className="headingblue">
+          EASYBUY<span style={{ color: "red" }}>ENTERPRISES</span>
+        </h6>
+        <p>
+          Buy a wide range of products online at affordable prices.
+        </p>
+      </MDBCol>
+      <MDBCol md="3" lg="3" xl="3" className="mx-auto mb-4 equal-column">
+        <h6 className="headingblue">
+          Products
+        </h6>
+        <p>
+          <a href="/#" className="text-reset">Phones</a>
+        </p>
+        <p>
+          <a href="/#" className="text-reset">Cars</a>
+        </p>
+        <p>
+          <a href="/#" className="text-reset">Electronics</a>
+        </p>
+        <p>
+          <a href="/#" className="text-reset">Clothings</a>
+        </p>
+        <p>
+          <a href="/#" className="text-reset">Laptops</a>
+        </p>
+        
+      </MDBCol>
+      <MDBCol md="3" lg="3" xl="3" className="mx-auto mb-4 equal-column">
+        <h6 className="headingblue">
+          Useful Links
+        </h6>
+        <p>
+          <a href="/cart" className="text-reset">Pricing</a>
+        </p>
+        <p>
+          <a href="/profile" className="text-reset">Profile</a>
+        </p>
+        <p>
+          <a href="/profile" className="text-reset">Dashboard</a>
+        </p>
+        <p>
+          <a href="/profile" className="text-reset">Products</a>
+        </p>
+    
+      </MDBCol>
+      <MDBCol md="3" lg="3" xl="3" className="mx-auto mb-4 equal-column">
+        <h6 className="headingblue">
+          Support / Customer Care
+        </h6>
+        <p>
+          <a href="mailto:contact@easybuy.com" className="text-reset">
+            Email Us
+          </a>
+        </p>
+        <p>
+          <a href="tel:+123456789" className="text-reset">
+            Call Us: +123-456-789
+          </a>
+        </p>
+      
+      </MDBCol>
+      <MDBCol md="5" lg="4" xl="4" className="mx-auto mb-md-0 mb-4 equal-column2">
+        <div className="newsletterdiv" style={{
+          margin:"0px",padding:"0px"
+        }}>
+          
+            <h6 className="headingblue" >
+              Subscribe to our newsletter to get updates on our latest offers </h6>
+          
+          <form action="" style={{ display: "flex" }}>
+            <input
+              type="email"
+              className="newsdiv"
+              placeholder="Enter Email address"
+            />
+            <button className="newsbtn">Subscribe</button>
+          </form>
+        </div>
+      </MDBCol>
+    </MDBRow>
+  </MDBContainer>
+</section>
 
-            </MDBCol>
-            <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
-              <h6 className="text-primary text-uppercase fw-bold mb-4">
-                Products
-              </h6>
-              <p>
-                <Link to="/#" className="text-reset">
-                  Phones{" "}
-                </Link>
-              </p>
-              <p>
-                <Link to="/#" className="text-reset">
-                  Cars
-                </Link>
-              </p>
-              <p>
-                <Link to="/#" className="text-reset">
-                  Electronics
-                </Link>
-              </p>
-              <p>
-                <Link to="/#" className="text-reset">
-                  Clothings
-                </Link>
-              </p>
-              <p>
-                <Link to="/#" className="text-reset">
-                  Laptops
-                </Link>
-              </p>
-            </MDBCol>
-
-            <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
-              <h6 className=" text-primary text-uppercase fw-bold mb-4">
-                Useful links
-              </h6>
-              <p>
-                <Link to="/cart" className="text-reset">
-                  Pricing
-                </Link>
-              </p>
-              <p>
-                <Link to="/profile" className="text-reset">
-                  Profile
-                </Link>
-              </p>
-              <p>
-                <Link
-                  to={`/admin-dashboard/${user?.result?.name}`}
-                  className="text-reset"
-                >
-                  DashBoard
-                </Link>
-              </p>
-              <p>
-                <Link to="all-products-page" className="text-reset">
-                  Products
-                </Link>
-              </p>
-            </MDBCol>
-
-            <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
-              <h6 className=" text-primary text-uppercase fw-bold mb-4">
-                Support/customer care
-              </h6>
-           <p style={{display:'flex', gap:'2rem',flexWrap:'wrap'}}>
-           <a href="mailto:daviskones2@gmail.com"><Email style={{ color: "black",fontSize:'2rem' }}/> <span style={{ color: "black"}} >Email</span></a>
-
-             
-<a href="https://wa.me/+1 (225) 453-4430" className="me-4 text-reset">
-<WhatsApp style={{ color: "black",fontSize:'2rem' }} /> Whatsapp
-</a>
-           </p>
-                
-              
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-      </section>
 
       <div
         className="text-center p-4"
