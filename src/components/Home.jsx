@@ -25,6 +25,14 @@ import {
 } from "mdb-react-ui-kit";
 import Paypa from "./Paypa";
 import { Rating } from "@mui/material";
+import Main from "./revews/App";
+import NewApp from "./revews/NewApp";
+import Phones from "./categories/Phones";
+import { Laptop } from "@mui/icons-material";
+import Laptops from "./categories/Laptops";
+import Electronics from "./categories/Electronics";
+import Cars from "./categories/Cars";
+import Others from "./categories/Others";
 // import { useGetAllProductsQuery } from "../slices/productsApi";
 
 const excerpt = (str) => {
@@ -51,6 +59,7 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   // const { data, error, isLoading } = useGetAllProductsQuery();
   const [query, setQuery] = useState("");
+  console.log("query", query);
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
     navigate("/cart");
@@ -64,7 +73,7 @@ const Home = () => {
         );
 
         res.data.sort(compare);
-        const result = res.data.filter((_, index) => index < 39);
+        const result = res.data.filter((_, index) => index < 80);
         setUsers(result);
         console.log(users);
       } catch (error) {
@@ -88,22 +97,46 @@ const Home = () => {
           Categories
         </MDBDropdownToggle>
         <MDBDropdownMenu style={{ width: "2rem" }}>
-          <Link to="/phones">
+          <Link
+            style={{ textDecoration: "", textAlign: "center", color: "black" }}
+            to="/phones"
+          >
             <MDBDropdownItem>Phones</MDBDropdownItem>
           </Link>
-          <Link to="/electronics">
+          <Link
+            style={{ textDecoration: "", textAlign: "center", color: "black" }}
+            to="/electronics"
+          >
             <MDBDropdownItem>Electronices</MDBDropdownItem>
           </Link>
-          <Link to="/laptops">
+          <Link
+            style={{ textDecoration: "", textAlign: "center", color: "black" }}
+            to="/laptops"
+          >
             <MDBDropdownItem>Laptops</MDBDropdownItem>
           </Link>
-          <Link to="/clothing">
+          <Link
+            style={{ textDecoration: "", textAlign: "center", color: "black" }}
+            to="/clothing"
+          >
             <MDBDropdownItem>Clothing</MDBDropdownItem>
           </Link>
-          <Link to="/furnatures">
+          <Link
+            style={{ textDecoration: "", textAlign: "center", color: "black" }}
+            to="/furnatures"
+          >
             <MDBDropdownItem>Furnatures</MDBDropdownItem>
           </Link>
-          <Link to="/others">
+          <Link
+            style={{ textDecoration: "", textAlign: "center", color: "black" }}
+            to="/cars"
+          >
+            <MDBDropdownItem>Cars</MDBDropdownItem>
+          </Link>
+          <Link
+            style={{ textDecoration: "", textAlign: "center", color: "black" }}
+            to="/others"
+          >
             <MDBDropdownItem>Others</MDBDropdownItem>
           </Link>
         </MDBDropdownMenu>
@@ -119,68 +152,147 @@ const Home = () => {
                 onChange={(e) => setQuery(e.target.value)}
               />
             </div>
+            {/* <NewApp/> */}
             <>
-              <h2>Welcome to Easybuy Enterprises</h2>
+              <h2 style={{}}>Welcome to Easybuy Enterprises</h2>
             </>
             <div style={{ marginLeft: "2rem" }}></div>
             <h3
               style={{ color: "blue ", textAlign: "center", marginTop: "1rem" }}
             >
-              New Arrivals
+              Latest Products
             </h3>
-            <div className="products">
-              {users &&
-                users
-                  .filter((user) => user.brand.toLowerCase().includes(query))
-                  .map((product) => (
-                    <div key={product._id} className="product">
-                      <h6>{product.name}</h6>
-                      <img src={product.image?.url} alt={product.name} />
-                      {/* <div className="details">
-                 
-                    <span className="pric"><span style={{display:'flex', gap:'2rem'}}>Price</span> <span>ksh{product.price}</span> </span>
-                  </div> */}
-                      <div className="details">
-                        <span style={{ display: "flex", gap: "4rem" }}>
-                          {" "}
-                          <span> price </span> <span> $ {product.price}</span>
-                        </span>
-                      </div>
-                      <div className="details">
-                        <span style={{ display: "flex", gap: "4rem" }}>
-                          {" "}
-                          <span>Category</span> <span>{product.brand}</span>{" "}
-                        </span>
-                      </div>
-                      <div className="details">
-                        <span style={{ display: "flex", gap: "4rem" }}>
-                          <span>
-                            {excerpt(product.desc)}
-                            <Link to={`/tour/${product._id}`}>Read More</Link>
-                          </span>
-                        </span>
-                      </div>
-                      <div>
-                        <span>
-                          <Rating
-                            name="simple-controlled"
-                            value={value}
-                            onChange={(event, newValue) => {
-                              setValue(newValue);
-                            }}
-                          />
-                        </span>
-                      </div>
-                      <button onClick={() => handleAddToCart(product)}>
-                        Add to cart
-                      </button>
 
-                      {/* <a  href={`https://wa.me/${product.No}`} target="_blank" rel="noreferrer noopener" style={{color:'orangered',listStyle:'none',textDecoration:'none'}}>
-                    <button style={{backgroundColor:'red'}}>get in touch <FaWhatsapp/>Whatsapp</button>
-                    </a> */}
+            <div className="products">
+              <>
+                {users.filter((user) =>
+                  user.brand.toLowerCase().includes(query.toLowerCase())
+                ).length === 0 ? (
+                  <div className="search-none">
+                    <div>
+                      <img
+                        src="https://www.jumia.co.ke/assets_he/images/binoculars.389fc56a.svg"
+                        alt=""
+                      />
                     </div>
-                  ))}
+                    <div>
+                      <h4
+                        style={{
+                          color: "orange",
+                          fontSize: "2.5rem",
+                          textAlign: "center",
+                          marginLeft: "",
+                        }}
+                      >
+                        No matching products found.
+                      </h4>
+                    </div>
+                    <div>
+                      <ul>
+                        <li>There are no results for “{query}”.</li>
+                        <li>Check your spelling for typing errors</li>
+                        <li>- Try searching with short and simple keywords</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <Link to="/">
+                        <button
+                          style={{ background: "orange", color: "white" }}
+                          className="btn"
+                        >
+                          Home Page
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  users
+                    .filter((user) =>
+                      user.brand.toLowerCase().includes(query.toLowerCase())
+                    )
+                    .map((product) => (
+                      <>
+                        <div
+                          style={{ background: "white" }}
+                          key={product._id}
+                          className="product"
+                        >
+                          {/* {users.length<0 ?'hello':'none'} */}
+                          <div>
+                            <h6>{product.name}</h6>
+                            <Link to={`/tour/${product._id}`}>
+                              <img
+                                src={product.image?.url}
+                                alt={product.name}
+                              />
+                            </Link>
+                            <div className="details">
+                              <span style={{ display: "flex", gap: "4rem" }}>
+                                {" "}
+                                <span> price </span>{" "}
+                                <span> $ {product.price}</span>
+                              </span>
+                            </div>
+                            <div className="details">
+                              <span style={{ display: "flex", gap: "4rem" }}>
+                                {" "}
+                                <span>Category</span>{" "}
+                                <span>{product.brand}</span>{" "}
+                              </span>
+                            </div>
+                            <div className="details">
+                              <span style={{ display: "flex", gap: "4rem" }}>
+                                <span>
+                                  {excerpt(product.desc)}
+                                  <Link to={`/tour/${product._id}`}>
+                                    Read More
+                                  </Link>
+                                </span>
+                              </span>
+                            </div>
+                            <div>
+                              <span>
+                                <Rating
+                                  name="read-only"
+                                  value={product.task}
+                                  readOnly
+                                />
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-around",
+                                gap: "3rem",
+                              }}
+                            >
+                              <p>
+                                {product.isComplete === true
+                                  ? "In stock"
+                                  : "Out of stock"}
+                              </p>
+                              <p>
+                                {product.isComplete === true
+                                  ? "1 item left"
+                                  : "0 items left"}
+                              </p>
+                            </div>
+
+                            <button onClick={() => handleAddToCart(product)}>
+                              Add to cart
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    ))
+                )}
+              </>
             </div>
+            <Phones />
+            <Laptops/>
+            <Electronics/>
+            {/* <Cars/> */}
+            <Others/>
           </>
         ) : status === "pending" ? (
           <p>Loading...</p>
@@ -199,7 +311,7 @@ const Home = () => {
         >
           <Link to="/products">
             <button style={{ paddingLeft: "4px", paddingRight: "4px" }}>
-              More products
+              All products
             </button>
           </Link>
         </div>

@@ -6,6 +6,7 @@ import './index.css'
 
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+import todosReducer from "./slices/todosSlice";
 
 import productsReducer, { productsFetch } from "./slices/productsSlice";
 import cartReducer, { getTotals } from "./slices/cartSlice";
@@ -16,6 +17,9 @@ const store = configureStore({
     products: productsReducer,
     cart: cartReducer,
     auth: authReducer,
+    todosState: todosReducer,
+ 
+
     [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

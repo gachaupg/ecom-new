@@ -13,6 +13,30 @@ const Paypa = ({cartItems}) => {
     name:'hello',
     price:9,
   }
+  const handlePayClick = async () => {
+    // Perform payment process here, either using FlutterWave or PayPal
+    // After successful payment, make an API call to your Node.js backend to save the order
+    const response = await fetch('http://localhost:5000/api/create-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user._id,
+        name:user.name,
+        email:user.email,
+        address:'77',
+        cartTotalAmount: cart.cartTotalAmount,
+      }),
+      
+    });
+    const result = await response.json();
+    console.log(result);
+
+    // Handle the result, such as showing a success message or navigating to a thank you page
+  };
+
+
   return (
     <PayPalScriptProvider
     options={{"client-id":import.meta.env.VITE_PAYPAL}}
@@ -24,7 +48,7 @@ const Paypa = ({cartItems}) => {
               {/* {cart.cartItems && cart.cartItems.map((cart)=>{
                 return( */}
 <>
-<PaypalCheckoutButton product={cartItems}/>
+<PaypalCheckoutButton  product={cartItems}/>
 
 </>
                 {/* )

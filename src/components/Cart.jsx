@@ -24,7 +24,31 @@ const Cart = () => {
   const handleCountryChange = (event, value) => {
     setSelectedCountry(value);
   };
+  const user = useSelector((state) => state.auth);
+  console.log('user',user);
+  const [shows,setShow]=useState(false)
+  const handlePayClick = async () => {
+    // Perform payment process here, either using FlutterWave or PayPal
+    // After successful payment, make an API call to your Node.js backend to save the order
+    const response = await fetch('http://localhost:5000/api/create-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user._id,
+        name:user.name,
+        email:user.email,
+        address:'77',
+        cartTotalAmount: cart.cartTotalAmount,
+      }),
+      
+    });
+    const result = await response.json();
+   setShow(true)
 
+    // Handle the result, such as showing a success message or navigating to a thank you page
+  };
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
 
@@ -155,17 +179,24 @@ const Cart = () => {
               <TextField style={{width:300,height:100,marginBottom:'3px'}} label="address" />
 
               {auth._id ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2rem",
-                  }}
-                >
-                  <FlutterWave cartItems={cart.cartTotalAmount} />
-<div></div>
-                  <Paypa cartItems={cart.cartTotalAmount} />
-                </div>
+               <div style={{ display: 'flex', flexDirection: 'column' }}>
+               {/* Payment gateway components */}
+               <button onClick={handlePayClick}>
+                 <FlutterWave cartItems={cart.cartTotalAmount} />
+               </button>
+               <div style={{ marginTop: '3rem' }}></div>
+               
+    {!shows && (
+      <button onClick={handlePayClick}>
+      Pay with paypal 
+    </button>
+    )}
+   {shows &&(
+        <Paypa cartItems={cart.cartTotalAmount} > </Paypa>
+
+   ) }
+  
+             </div>
               ) : (
                 <button
                   className="cart-login"

@@ -1,18 +1,43 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addToCart } from "../slices/cartSlice";
+import { Rating } from "@mui/material";
+import Main from "./revews/App";
+import Electronics from "./categories/Electronics";
 
 const SingleTour = () => {
+  const [todo, setTodo] = useState({
+    task: "",
+    rating: true,
+  });
+  const items = useSelector((state) => state.items);
+
   const dispatch = useDispatch();
+  const [value, setValue] = useState("");
+  console.log(value);
   const navigate = useNavigate();
   const [users, setTours] = useState([]);
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
     navigate("/cart");
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (todo._id) {
+      dispatch(updateTodo(todo));
+    }
+
+    setTodo({
+      task: "",
+      rating: false,
+    });
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -41,8 +66,8 @@ const SingleTour = () => {
         display: "flex",
         alinItems: "center",
         justifyContent: "center",
-        width:'100%',
-        marginTop:"3rem"
+        width: "100%",
+        marginTop: "3rem",
       }}
     >
       <Card border="orange" style={{ width: "18rem" }}>
@@ -51,7 +76,7 @@ const SingleTour = () => {
           <img style={{ width: "100%" }} src={users.image?.url} alt="" />
           <Card.Text>
             {" "}
-            <span>price</span> ${users.price}
+            <span>price:</span> ${users.price}
           </Card.Text>
           <Card.Text>
             {" "}
@@ -59,7 +84,13 @@ const SingleTour = () => {
           </Card.Text>
           <Card.Text>
             {" "}
-            <span>Category</span> {users.brand}
+            <span>Category: </span> {users.brand}
+          </Card.Text>
+          <Card.Text>
+            <p>{users.isComplete === true && "in -stock"}</p>
+            <p>{users.isComplete == false && "out -stock"}</p>
+            <p>{users.isComplete === true && "1"}</p>
+            <p>{users.isComplete === false && "1"}</p>
           </Card.Text>
         </Card.Body>
         <button
@@ -68,7 +99,7 @@ const SingleTour = () => {
             borderRadius: "2px",
             border: "none",
             color: "white",
-            height:"3rem"
+            height: "3rem",
           }}
           onClick={() => handleAddToCart(users)}
         >
@@ -78,30 +109,19 @@ const SingleTour = () => {
       <Card border="orange" style={{ width: "70%" }}>
         <Card.Header>Features</Card.Header>
         <Card.Body>
-          <Card.Text style={{ display: "flex", gap: "5.5rem" }}>
-            <span>specification one:</span> <span>{users.ram}</span>
-          </Card.Text>
-          <Card.Text style={{ display: "flex", gap: "5.5rem" }}>
-            <span>Specification two:</span> {users.rom}
-          </Card.Text>
-          <Card.Text style={{ display: "flex", gap: "5rem" }}>
-            <span>Specification three</span> {users.battery}
-          </Card.Text>
-          <Card.Text style={{ display: "flex", gap: "5rem" }}>
-            <span>Specification four:</span> {users.camera}
-          </Card.Text>
-          <Card.Text style={{ display: "flex", gap: "5rem" }}>
-            {" "}
-            <span>Specification five</span> {users.os}
-          </Card.Text>
-          <Card.Text style={{ display: "flex", gap: "6rem" }}>
-            {" "}
-            <span></span> {users.sim}
-          </Card.Text>
+          <Main />
           <p>Description</p>
           <Card.Text>{users.desc}</Card.Text>
         </Card.Body>
       </Card>
+
+      <h2>Related Products</h2>
+
+      {users.brand==='electronic' &&(
+        <>
+        <Electronics/>
+        </>
+      ) }
     </div>
   );
 };

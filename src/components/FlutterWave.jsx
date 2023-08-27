@@ -38,7 +38,7 @@ const FlutterWave = ({ cartItems }) => {
   return (
     <div style={{ marginBottom: '.7rem' }}>
       <div>
-        <h4>Pay with flutterwave</h4>
+       
         <FlutterWaveButton {...fwConfig} />
       </div>
     </div>

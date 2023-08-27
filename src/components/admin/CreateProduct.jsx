@@ -82,6 +82,7 @@ const CreateProduct = () => {
           <option value="electronic">electronic</option>
           <option value="clothing">Clothing</option>
           <option value="furnatures">Furnatures</option>
+          <option value="cars">Cars</option>
           <option value="others">Other</option>
         </select>
         <input

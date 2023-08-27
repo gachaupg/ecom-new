@@ -24,7 +24,7 @@ const excerpt = (str) => {
   }
   return str;
 };
-const Laptops = () => {
+const Cars = () => {
   function compare(a, b) {
     if (a._id < b._id) {
       return 1;
@@ -67,7 +67,7 @@ const Laptops = () => {
 
   return (
     <>
-      <h3 style={{ textAlign: "" }}>All Laptops</h3>
+      <h3 style={{ textAlign: "" }}> Cars</h3>
 
       <div className="products">
         {status === "success" ? (
@@ -76,7 +76,7 @@ const Laptops = () => {
               return (
                 <>
                   
-                    {product.brand === "laptop" && (
+                    {product.brand === "car" && (
                       <>
                       <div
                     style={{ background: "white" }}
@@ -164,4 +164,4 @@ const Laptops = () => {
   );
 };
 
-export default Laptops;
+export default Cars;

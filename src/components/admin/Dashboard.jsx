@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Outlet, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import BasicTable from "../auth/ActiveUsers";
+import DashboardMains from "./dashboard/DashboardMains";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth);
@@ -8,9 +10,10 @@ const Dashboard = () => {
   if (!auth.isAdmin) return <p>Access denied. Not an Admin!</p>;
 
   return (
+    <>
     <StyledDashboard>
-      <SideNav>
-        <h3>Quick Links</h3>
+      {/* <SideNav> */}
+        {/* <h3>Quick Links</h3>
         <NavLink
           className={({ isActive }) =>
             isActive ? "link-active" : "link-inactive"
@@ -34,20 +37,29 @@ const Dashboard = () => {
           to="/admin/orders"
         >
           Orders
-        </NavLink>
-        <NavLink
+        </NavLink> */}
+        {/* <NavLink
           className={({ isActive }) =>
             isActive ? "link-active" : "link-inactive"
           }
           to="/admin/users"
         >
           Users
-        </NavLink>
-      </SideNav>
-      <Content>
+        </NavLink> */}
+      {/* </SideNav> */}
+      <div style={{marginTop:'1rem'}}>
+      {/* <Content> */}
         <Outlet />
-      </Content>
-    </StyledDashboard>
+        {/* <BasicTable/> */}
+<DashboardMains/>
+      {/* </Content> */}
+
+      </div>
+     
+      </StyledDashboard>
+
+
+      </>
   );
 };
 
@@ -55,18 +67,18 @@ export default Dashboard;
 
 const StyledDashboard = styled.div`
   display: flex;
-  height: 100vh;
 `;
 
 const SideNav = styled.div`
   border-right: 1px solid gray;
-  height: calc(100vh - 70px);
+  height: 100;
   position: fixed;
   overflow-y: auto;
   width: 200px;
   display: flex;
   flex-direction: column;
   padding: 2rem;
+ 
   h3 {
     margin: 0 0 1rem 0;
     padding: 0;

@@ -8,6 +8,7 @@ const initialState = {
   status: null,
   createStatus: null,
   deleteStatus: null,
+  editStatus:null,
 };
 
 export const productsFetch = createAsyncThunk(
@@ -37,6 +38,25 @@ export const productsCreate = createAsyncThunk(
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data);
+    }
+  }
+);
+export const productEdit = createAsyncThunk(
+  "products/productEdit",
+ 
+  async (todo, { rejectWithValue }) => {
+    try {
+      const { _id, rating,  countInStock, uid } = todo;
+
+      const response = await axios.put(baseURL + "products/" + _id, {
+       rating,
+       countInStock,
+        uid,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response?.data);
     }
   }
 );
@@ -112,6 +132,36 @@ const productsSlice = createSlice({
     [productsDelete.rejected]: (state, action) => {
       state.deleteStatus = "rejected";
     },
+
+    [productEdit.pending]: (state, action) => {
+    
+       
+        state.editStatus= "pending"
+        
+      
+    },
+    [productEdit.fulfilled]: (state, action) => {
+      const updatedTodos = state.items.map((todo) =>
+        todo._id === action.payload._id ? action.payload : todo
+      );
+      return {
+        ...state,
+        items: updatedTodos,
+       
+        editStatus: "success",
+      
+      };
+    },
+    [productEdit.rejected]: (state, action) => {
+      return {
+        ...state,
+        
+        editStatus: "rejected",
+       
+      };
+    },
+    
+
   },
 });
 

@@ -6,7 +6,10 @@
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
 }
-
+.App{
+  background-color: rgb(241, 240, 240);
+  /* max-width: 1700px; */
+}
 /* Not Found */
 .not-found {
   display: flex;
@@ -54,16 +57,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   border-radius: 50%;
-  background: yellow;
+  background: rgb(248, 70, 153);
   font-size: 14px;
   font-weight: 700;
-  color: black;
+  color: rgb(48, 42, 42);
+ 
   /* margin-left: 5px; */
 }
-
+.logo-text{
+  display: flex;
+}
 /* Home */
 .main-left{
   display: flex;
@@ -95,6 +101,7 @@
   flex-wrap: wrap;
   margin-top: 2rem;
   width: 100%;
+ 
 }
 .product {
   display: flex;
@@ -348,7 +355,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 100%!important;
     margin: 1rem auto;
     padding: 1rem;
@@ -360,12 +367,16 @@
   .nav-bar h2 {
     font-size: 30px;
   }
-  
+  .logo-text{
+    display: none;
+  }
   
   .home-top{
     width: 100%;
   }
-
+.text-dis{
+  display: none;
+}
   /* Cart */
   .cart-container {
     padding: 2rem;
@@ -392,7 +403,14 @@
   }
 }
 
-
+.search-none{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
 /* search */
 
 .search{
@@ -404,9 +422,11 @@
   margin-bottom: 1rem;
 }
 .search input{
-  border-radius: 1rem;
-  width: 70%;
+  border-radius: .4rem;
+  width: 65%;
   text-align: center;
+  border: 1px solid black;
+  height: 2.4rem;
 }
 
 .footer{
@@ -420,7 +440,9 @@
   background-color: black;
   color: aliceblue !important;
 }
-
+.text-dis{
+  display: flex;
+}
 
 .test-trust{
   width: 100%;
@@ -441,3 +463,10 @@
   justify-content: center; 
 }
 
+.main-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+
+}

@@ -35,6 +35,8 @@ import Furnatures from "./components/categories/Furnatures";
 import Others from "./components/categories/Others";
 import Paypa from "./components/Paypa";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+import Cars from "./components/categories/Cars";
+import AllTrans from "./components/admin/dashboard/All-Transactions";
 function App() {
   const dispatch = useDispatch();
 
@@ -69,6 +71,7 @@ function App() {
             <Route path="/clothing" element={<Clothing/>} />
             <Route path="/furnatures" element={<Furnatures/>} />
             <Route path="/others" element={<Others/>} />
+            <Route path="/cars" element={<Cars/>} />
             <Route path="/admin" element={<Dashboard />}>
             
               <Route path="summary" element={<Summary />} />
@@ -78,6 +81,7 @@ function App() {
               </Route>
               <Route path="users" element={<Users />} />
               <Route path="orders" element={<Orders />} />
+              <Route path="transactions" element={< AllTrans/>} />
             </Route>
           <Route path="checkout" element={<Paypa/>}/>
             <Route path="*" element={<NotFound />} />

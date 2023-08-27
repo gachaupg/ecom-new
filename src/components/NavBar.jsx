@@ -1,4 +1,4 @@
-import  React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -20,10 +20,16 @@ import { logoutUser } from "../slices/authSlice";
 import CallIcon from "@mui/icons-material/Call";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
+import {
+  MDBDropdown,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+  MDBDropdownItem,
+} from "mdb-react-ui-kit";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { AccountBalanceRounded, AccountBoxOutlined } from "@mui/icons-material";
+import { VscAccount } from "react-icons/vsc";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = [
   { one: "Profile" },
@@ -37,12 +43,11 @@ const settings = [
 ];
 
 function ResponsiveAppBar() {
-const user = useSelector((state) => state.auth);
-console.log('userggg',user);
-const { cartTotalQuantity } = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.auth);
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
 
-const [query, setQuery] = useState("");
-  const [tours,setTours]=useState([])
+  const [query, setQuery] = useState("");
+  const [tours, setTours] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,7 +63,7 @@ const [query, setQuery] = useState("");
     setSearchTerm(searchTerm);
     filterItems(selectedCategory, searchTerm);
   };
-console.log('search',searchTerm);
+  console.log("search", searchTerm);
   const filterItems = (category, searchTerm) => {
     const filtered =
       category === "All"
@@ -74,26 +79,26 @@ console.log('search',searchTerm);
     setFilteredItems(filtered);
   };
 
-  const handleSearch= async (event)=>{
-    event.preventDefault()
-    let key =event.target.value
-    if(key){
-     let result= await fetch(`https://hustle-kenya-7azi.onrender.com/products/search${key}`)
-  result=await result.json()
-  if(result){
-    const results = result.filter((_, index) => index < 6);
-  setTours(  results)
-    
-  } console.log(` `,result);
-    }else{
-      setTours()
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    let key = event.target.value;
+    if (key) {
+      let result = await fetch(
+        `https://hustle-kenya-7azi.onrender.com/products/search${key}`
+      );
+      result = await result.json();
+      if (result) {
+        const results = result.filter((_, index) => index < 6);
+        setTours(results);
+      }
+      console.log(` `, result);
+    } else {
+      setTours();
     }
-  
-  }
+  };
 
   const [data, setData] = useState([]);
 
-  
   function compare(a, b) {
     if (a._id < b._id) {
       return 1;
@@ -112,7 +117,7 @@ console.log('search',searchTerm);
         res.data.sort(compare);
         //   const result = res.data.filter((_, index) => index < 8);
         setFilteredItems(res.data);
-        console.log('filterd' ,filteredItems);
+        console.log("filterd", filteredItems);
       } catch (error) {
         console.log(error);
         // setLoading(false);
@@ -123,7 +128,9 @@ console.log('search',searchTerm);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`https://hustle-kenya-7azi.onrender.com/stats/hustle?q=${query}`);
+      const res = await axios.get(
+        `https://hustle-kenya-7azi.onrender.com/stats/hustle?q=${query}`
+      );
       setData(res.data);
     };
     if (query.length === 0 || query.length > 2) fetchData();
@@ -157,7 +164,7 @@ console.log('search',searchTerm);
   const navigate = useNavigate();
   const handleLogout = () => {
     dispatch(logoutUser());
-    toast.error('logout success')
+    toast.error("logout success");
     navigate("/");
   };
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -196,222 +203,257 @@ console.log('search',searchTerm);
   };
 
   return (
-    <><h4 style={{color:'red'}}>Choose</h4>
-    
-    <AppBar style={{ color: "white ", background: "black" }} position="fixed">
-      
-      <Container maxWidth="xl df">
-      
-        <Toolbar disableGutters>
-          
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          
+    <>
+      <h4 style={{ color: "red" }}>Choose</h4>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+      <AppBar style={{ color: "black ", background: "white" }} position="fixed">
+
+        <Container maxWidth="xl df">
+          <Toolbar disableGutters>
+          
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               
-              <MenuIcon />
-              
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {/* {pages.map((page) => (
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {/* {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
 
 
                 </MenuItem> */}
-              {/* ))} */}
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  {user._id &&  user.verified===true && (
-                    <Link to="/profile">
-                      <Typography textAlign="center">{setting.one}</Typography>
-                    </Link>
-                  )}
-                  
-                  {user.isAdmin === true && (
-                    <Link to={`/admin/summary`}>
-                      {setting.seven}
-                    </Link>
-                  )}
-                   <Link to="/products">
+                {/* ))} */}
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                    {user._id && user.verified === true && (
+                      <Link to="/profile">
                         <Typography textAlign="center">
-                          {setting.eight}
+                          {setting.one}
                         </Typography>
                       </Link>
-                  {user._id ? (
-                    <>
-                      <Typography
-                        onClick={() => handleLogout()}
-                        textAlign="center"
-                      >
-                        {setting.six}
-                      </Typography>
-                     
-                     
-                    </>
-                  ) : (
-                    <Link to="/login">
-                      <Typography textAlign="center">{setting.four}</Typography>
-                    </Link>
-                  )}
-                </MenuItem>
-              ))}
-            </Menu>
-            
-          </Box>
-          <Link style={{textDecoration:'none',listStyle:'none',color:'white'}} to='/'>
-          <h5>EASYBUYENTERPRISES</h5>
+                    )}
 
-          </Link>
-          <Link to="/cart">
-       <div style={{marginLeft:'2rem',textDecoration:'none'}} className="nav-bag">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="35"
-            height="35"
-            fill="currentColor"
-            className="bi bi-handbag-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M8 1a2 2 0 0 0-2 2v2H5V3a3 3 0 1 1 6 0v2h-1V3a2 2 0 0 0-2-2zM5 5H3.36a1.5 1.5 0 0 0-1.483 1.277L.85 13.13A2.5 2.5 0 0 0 3.322 16h9.355a2.5 2.5 0 0 0 2.473-2.87l-1.028-6.853A1.5 1.5 0 0 0 12.64 5H11v1.5a.5.5 0 0 1-1 0V5H6v1.5a.5.5 0 0 1-1 0V5z" />
-          </svg>
-          <span className="bag-quantity">
-            <span>{cartTotalQuantity}</span>
-          </span>
-        </div>
-      </Link>
-         
-          <Box
-            sx={{ flexGrow: 1, ml: 20, display: { xs: "none", md: "flex" } }}
-          >
-           
-          
-            
-          <Link style={{marginLeft:'1rem',textDecoration:'none'}} to='/products'>
-              All Products
-            </Link>
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            
-            <Tooltip title="Open settings">
-            
-              <IconButton
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginTop: ".5rem",
-                  alignItems: "",
-                }}
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0 }}
-              >
-                {/* {user?.result?.name} */}
-                <Avatar alt="" src={user?.img} />
-                
-              </IconButton>
-           
-            </Tooltip>
-
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  {user._id && (
-                    <Link to="/profile">
-                      <Typography textAlign="center">{setting.one}</Typography>
-                    </Link>
-                  )}
-                  
-                  {user.isAdmin === true && (
-                    <Link to={`/admin/summary`}>
-                      {setting.seven}
-                    </Link>
-                  )}
-                  {user._id ? (
-                    <>
-                      <Typography
-                        onClick={() => handleLogout()}
-                        textAlign="center"
-                      >
-                        {setting.six}
+                    {user.isAdmin === true && (
+                      <Link to={`/admin/summary`}>{setting.seven}</Link>
+                    )}
+                    <Link to="/products">
+                      <Typography textAlign="center">
+                        {setting.eight}
                       </Typography>
+                    </Link>
+                    {user._id ? (
                       <>
+                        <Typography
+                          onClick={() => handleLogout()}
+                          textAlign="center"
+                        >
+                          {setting.six}
+                        </Typography>
                       </>
-                      <div >
-                     
-                     
-                     
-                      <Link to="/products">
+                    ) : (
+                      <Link to="/login">
                         <Typography textAlign="center">
-                          {setting.eight}
+                          {setting.four}
                         </Typography>
                       </Link>
-                      </div>
+                    )}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <div>
+              <Link to='/'>
 
-                     
-                    </>
-                    
-                  ) : (
-                    <Link to="/login">
-                      <Typography textAlign="center">{setting.four}</Typography>
-                    </Link>
-                  )}
-                </MenuItem>
-              ))}
-            </Menu>
+              
+              <img style={{
+                margin:'.2rem',
+            width:'5rem',
+            height:'4rem',
+            border:'none',
+            borderRadius:'50%',
+            objectFit:'cover'
+          }} src="https://res.cloudinary.com/pitz/image/upload/v1693046138/Capture01_hyu8ub.png" alt="" />
+</Link>
+              </div>
+            <div className="main-nav">
+             
+              <div>
+              <Link
+              style={{
+                textDecoration: "none",
+                listStyle: "none",
+                color: "black",
+              }}
+              to="/"
+            >
+              <h5
+              className="logo-text"
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: "700",
+                  marginTop: "1rem",
+                }}
+              >
+                EASYBUYENTERPRISES
+              </h5>
+            </Link>
+              </div>
+              <div>
+              <Link to="/cart">
+              <div
+                style={{ marginLeft: "2rem", textDecoration: "none" }}
+                className="nav-bag"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  fill="rgb(48, 47, 47)"
+                  className="bi bi-handbag-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 1a2 2 0 0 0-2 2v2H5V3a3 3 0 1 1 6 0v2h-1V3a2 2 0 0 0-2-2zM5 5H3.36a1.5 1.5 0 0 0-1.483 1.277L.85 13.13A2.5 2.5 0 0 0 3.322 16h9.355a2.5 2.5 0 0 0 2.473-2.87l-1.028-6.853A1.5 1.5 0 0 0 12.64 5H11v1.5a.5.5 0 0 1-1 0V5H6v1.5a.5.5 0 0 1-1 0V5z" />
+                </svg>
+                <span className="bag-quantity">
+                  <span>{cartTotalQuantity}</span>
+                </span>
+              </div>
+            </Link>
+              </div>
+              <div>
+              <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <div style={{ display: "flex",gap:'1rem' }}>
+                  <div style={{display:'flex',gap:'.5rem'}}>
+                   <VscAccount size={40} style={{cursor:'pointer', marginTop: ".6rem" }}
+                                      onClick={handleOpenUserMenu}
+
+                  /> <button onClick={handleOpenUserMenu} className="btn">
+                    Accounts <span >V</span>
+                    </button> 
+                  </div>
+          
+                  <IconButton
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      marginTop: ".5rem",
+                      alignItems: "",
+                    }}
+                    onClick={handleOpenUserMenu}
+                    sx={{ p: 0 }}
+                  >
+                    {/* {user?.result?.name} */}
+                    {/* <Avatar alt="" src={user?.img} /> */}
+                  </IconButton>
+                </div>
+              </Tooltip>
+
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    {user._id && (
+                      <Link to="/profile">
+                        <Typography textAlign="center">
+                          {setting.one}
+                        </Typography>
+                      </Link>
+                    )}
+
+                    {user.isAdmin === true && (
+                      <Link to={`/admin/summary`}>{setting.seven}</Link>
+                    )}
+                    {user._id ? (
+                      <>
+                        <Typography
+                          onClick={() => handleLogout()}
+                          textAlign="center"
+                        >
+                          {setting.six}
+                        </Typography>
+                        <></>
+                        <div>
+                          <Link to="/products">
+                            <Typography textAlign="center">
+                              {setting.eight}
+                            </Typography>
+                          </Link>
+                        </div>
+                      </>
+                    ) : (
+                      <Link to="/login">
+                        <Typography textAlign="center">
+                          {setting.four}
+                        </Typography>
+                      </Link>
+                    )}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+              </div>
+            </div>
             
-          </Box>
-          <p style={{color:'black'}}>yryueryueryu</p>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            
+
+            {/* <Box
+              sx={{ flexGrow: 1, ml: 20, display: { xs: "none", md: "flex" } }}
+            >
+              <Link
+                style={{ marginLeft: "1rem", textDecoration: "none" }}
+                to="/products"
+              >
+                All Products
+              </Link>
+            </Box> */}
+
+           
+          </Toolbar>
+        </Container>
+      </AppBar>
     </>
   );
 }
 export default ResponsiveAppBar;
-
-
-
-
-
 
 // import { Link, useNavigate } from "react-router-dom";
 // import { useSelector, useDispatch } from "react-redux";
@@ -460,7 +502,7 @@ export default ResponsiveAppBar;
 //             </div>
 //             </>
 //           ) : null}
-         
+
 //           <div
 //           style={{marginLeft:'1rem'}}
 //             onClick={() => {
